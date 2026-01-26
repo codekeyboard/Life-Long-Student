@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Docker #1</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Docker #1</h1>
+</header>
+<h2 id="monolithic-architecture">Monolithic Architecture</h2>
+<p>A monolithic application is built as a single unit. The entire
+project runs as one service, instead of being split into multiple
+independent services.</p>
+<p>For example, in a web application, you may have a backend, frontend,
+API layer, and database logic. In a monolithic setup, all of these live
+inside one project and are deployed together as a single service.</p>
+<p>This approach is simple to build and easy to run at the beginning.
+However, it becomes harder to scale and maintain as the application
+grows, because even a small change requires redeploying the whole
+system.</p>
+<p>Nice idea. Visuals make this click much faster. I’ll keep it simple
+and add arrow-style flow explanations, plus diagrams you can mentally
+map while reading.</p>
+<figure>
+<img
+src="https://media.geeksforgeeks.org/wp-content/uploads/20240405152350/Monolithic-Architecture.webp"
+alt="Image" />
+<figcaption aria-hidden="true">Image</figcaption>
+</figure>
+<figure>
+<img src="https://microservices.io/i/DecomposingApplications.011.jpg"
+alt="Image" />
+<figcaption aria-hidden="true">Image</figcaption>
+</figure>
+<pre><code>[ UI ]
+   ↓
+[ Backend ]
+   ↓
+[ Business Logic ]
+   ↓
+[ Database ]</code></pre>
+<p>All parts are tightly connected and run as <strong>one single
+service</strong>.</p>
+<ul>
+<li>One project</li>
+<li>One deployment</li>
+<li>One service running everything</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+<li>Easy to build</li>
+<li>Easy to run</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li>Hard to scale</li>
+<li>Any small change → redeploy the entire app</li>
+</ul>
+<h2 id="microservices-architecture">Microservices Architecture</h2>
+<p>Microservices follow a loosely coupled architecture. The application
+is split into multiple small projects, where each service handles a
+specific responsibility or feature.</p>
+<p>Each functionality runs as its own service with its own codebase and
+deployment process. Services communicate with each other through
+APIs.</p>
+<p>This makes the system easier to scale and maintain. Since each
+service is smaller and focused, changes are easier to manage and
+individual services can be scaled independently without affecting the
+entire application.</p>
+<figure>
+<img src="https://microservices.io/i/Microservice_Architecture.png"
+alt="Image" />
+<figcaption aria-hidden="true">Image</figcaption>
+</figure>
+<figure>
+<img src="https://miro.medium.com/1%2AJIDAhbsGGTztmcJ6OxNkrg.png"
+alt="Image" />
+<figcaption aria-hidden="true">Image</figcaption>
+</figure>
+<pre><code>[ UI ]
+   ↓
+[ Auth Service ]  →  [ User Service ]  →  [ Order Service ]
+        ↓                  ↓                    ↓
+     DB(Auth)           DB(User)            DB(Order)</code></pre>
+<p>Each feature is its <strong>own service</strong>, running
+independently.</p>
+<ul>
+<li>Project split into multiple small services</li>
+<li>Each service handles one responsibility</li>
+<li>Services communicate via APIs</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+<li>Easy to scale</li>
+<li>Smaller codebases</li>
+<li>Independent deployments</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li>More complex setup</li>
+<li>Needs good service communication</li>
+</ul>
+<hr />
+<h2 id="vm-vs-containers">VM vs Containers</h2>
+<table>
+<colgroup>
+<col style="width: 0%" />
+<col style="width: 59%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>VM</th>
+<th>Container</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>A Virtual Machine takes longer to boot, usually around 3 to 5
+minutes. Each VM runs its own full operating system.</td>
+<td>Containers start much faster because they share the host OS
+kernel.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>One VM runs on one OS instance with its own kernel.</td>
+<td>Multiple containers can run on a single OS.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Heavier in terms of resource usage.</td>
+<td>Lightweight and more resource efficient.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Applications run inside a full OS environment.</td>
+<td>Applications run from container images, which start a container when
+executed.</td>
+</tr>
+</tbody>
+</table>
+<figure>
+<img
+src="https://www.netapp.com/media/container-vs-vm-inline1_tcm19-82163.png?v=85344"
+alt="Image" />
+<figcaption aria-hidden="true">Image</figcaption>
+</figure>
+<figure>
+<img src="https://miro.medium.com/1%2AKtazvJZ-IX6aoq3jCjD5tA.png"
+alt="Image" />
+<figcaption aria-hidden="true">Image</figcaption>
+</figure>
+<h3 id="virtual-machine-vm">Virtual Machine (VM)</h3>
+<pre><code>[ Hardware ]
+     ↓
+[ Host OS ]
+     ↓
+[ Hypervisor ]
+     ↓
+[ VM OS ]
+     ↓
+[ Application ]</code></pre>
+<hr />
+<h3 id="containers">Containers</h3>
+<pre><code>[ Hardware ]
+     ↓
+[ Host OS ]
+     ↓
+[ Container Engine ]
+     ↓
+[ Container Image → Running Container ]</code></pre>
+</body>
+</html>
