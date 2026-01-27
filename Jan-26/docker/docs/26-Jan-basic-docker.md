@@ -79,8 +79,11 @@ Docker Container
 
 ## Building
 
+tag is the version tag for the image
+
 `docker build -t [name:tag]` (build an image using docker file located in same folder)
 
 `docker build -t [name:tag] -f [fileName]` (build an image using docker file located in different folder)
 
-`docker tag [imageName] [name:tag] `(tag and existing image)
+`docker tag [imageName] [name:tag] `(tag and existing image) (change tage of exisitng image)
+

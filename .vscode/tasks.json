@@ -1,0 +1,46 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "docker-build",
+			"label": "docker-build",
+			"platform": "node",
+			"dockerBuild": {
+				"dockerfile": "${workspaceFolder}/Jan-26/practice/node/contextplaceholder/backend/Dockerfile",
+				"context": "${workspaceFolder}/Jan-26/practice/node/contextplaceholder/backend",
+				"pull": true
+			},
+			"node": {
+				"package": "${workspaceFolder}/Jan-26/practice/node/contextplaceholder/backend/package.json"
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: release",
+			"dependsOn": [
+				"docker-build"
+			],
+			"platform": "node",
+			"node": {
+				"package": "${workspaceFolder}/Jan-26/practice/node/contextplaceholder/backend/package.json"
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: debug",
+			"dependsOn": [
+				"docker-build"
+			],
+			"dockerRun": {
+				"env": {
+					"DEBUG": "*",
+					"NODE_ENV": "development"
+				}
+			},
+			"node": {
+				"package": "${workspaceFolder}/Jan-26/practice/node/contextplaceholder/backend/package.json",
+				"enableDebugging": true
+			}
+		}
+	]
+}
