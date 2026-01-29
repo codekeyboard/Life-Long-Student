@@ -8,4 +8,4 @@ Data Serialization: This is the process of converting data into a format that ca
 
 Human-friendly: YAML was designed to be easy to read and write for humans, with minimal syntax and formatting overhead. It looks more like regular text than complex code.
 
-Used by docker compose and kubernetes
+Used by docker compose and kubernetes.
