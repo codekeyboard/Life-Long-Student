@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App (Compose)</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1>Todo App</h1>
+        <p class="subtle">Frontend (Vite) → Backend (Node) → MariaDB</p>
+      </header>
+
+      <section class="card">
+        <form id="todo-form" class="row">
+          <input id="todo-title" type="text" placeholder="Add a todo..." autocomplete="off" />
+          <button type="submit">Add</button>
+        </form>
+        <div id="status" class="status" aria-live="polite"></div>
+      </section>
+
+      <section class="card">
+        <div class="row between">
+          <h2 class="h2">Todos</h2>
+          <button id="refresh" type="button" class="secondary">Refresh</button>
+        </div>
+        <ul id="todo-list" class="list"></ul>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
+

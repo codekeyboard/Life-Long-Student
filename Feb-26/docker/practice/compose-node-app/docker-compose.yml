@@ -1,0 +1,77 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    command: sh -c "npm install && npm run dev"
+    environment:
+      NODE_ENV: development
+      PORT: 8080
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: todo_user
+      DB_PASSWORD_FILE: /run/secrets/db-password
+      DB_NAME: todo_db
+    secrets:
+      - db-password
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - public
+      - private
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+      - backend_node_modules:/app/node_modules
+
+  db:
+    image: mariadb:11
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpassword
+      MARIADB_DATABASE: todo_db
+      MARIADB_USER: todo_user
+      MARIADB_PASSWORD_FILE: /run/secrets/db-password
+    secrets:
+      - db-password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - private
+    healthcheck:
+      test: ["CMD-SHELL", "command -v mariadb-admin >/dev/null 2>&1 && mariadb-admin ping -h 127.0.0.1 -u root -p$$MARIADB_ROOT_PASSWORD --silent || mysqladmin ping -h 127.0.0.1 -u root -p$$MARIADB_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  frontend:
+    build:
+      context: ./frontend
+    restart: unless-stopped
+    command: sh -c "npm install && npm run dev"
+    depends_on:
+      - backend
+    networks:
+      - public
+    ports:
+      - "3000:5173"
+    volumes:
+      - ./frontend/src:/code/src
+      - frontend_node_modules:/code/node_modules
+
+volumes:
+  db_data:
+  backend_node_modules:
+  frontend_node_modules:
+
+secrets:
+  db-password:
+    file: ./secrets/db-password.txt
+
+networks:
+  public:
+  private:
+    internal: true
