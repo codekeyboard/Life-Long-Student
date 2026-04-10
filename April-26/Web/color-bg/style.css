@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.red {
+    height: 1335px;
+    width: 654px;
+    background-color: aqua;
+    background-image: url('image.png');
+    color: white;
+    background-repeat: no-repeat;
+    /* it can cover if to get cover the whole container and maintain aspect ratio and contain if to get contain the whole image and maintain aspect ratio but may not cover the whole container */
+    /* background-size: cover; */
+    background-size: 63px 63px;
+    background-position: center;
+    /* use scroll to scroll background nad fixed to keep it in place and scroll the content */
+    /* background-attachment: fixed; */
+}
+
+.green {
+    background: green;
+    color: aqua
+}

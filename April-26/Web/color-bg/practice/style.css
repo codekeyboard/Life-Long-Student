@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    background-color: black;
+    color: white;
+    width: 344px;
+    height: 333px;
+}
+
+.main {
+    color: red;
+}
+
+.bg {
+    width: 344px;
+    height: 3344px;
+    background-image: url('image.png');
+    background-repeat: no-repeat;
+    background-color: aqua;
+    background-size: 341px 341px;
+    background-attachment: fixed;
+}
