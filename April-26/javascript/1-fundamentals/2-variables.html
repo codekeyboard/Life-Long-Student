@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- let -->
+    <script>
+        let message = "Hello";
+        let name;
+        name = "Saim"
+        alert(message);
+        alert(name);
+    </script>
+    <!-- const(unchanged) instead of let -->
+     <script>
+        const birthday = "1,2,2003";
+        // it can not be chnaged later in next line like this 
+        // birthday = "1,2,2004"; //it wil not work
+        alert(birthday);
+        // we can const the color with uppercase words than can use by let 
+        const COLOR_RED = "#F00";
+        let red = COLOR_RED;
+        // red = "a" 
+        alert(red);
+     </script>
+     <!-- string use backtick for adding a variable in as string than add dollar sign wrapped in curl brackets-->
+      <script>
+        let str = "hello";
+        let str1 = `${str}, world`;
+        alert(`${str1}, Saim `);
+      </script>
+      <!-- boolean -->
+    <script>
+        let isgreater = true
+        let isnotgreater = false
+        alert(isgreater);
+        alert(isnotgreater);
+        
+    </script>
+</body>
+</html>
